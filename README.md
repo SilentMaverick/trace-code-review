@@ -17,6 +17,7 @@ Then open `http://127.0.0.1:8765`.
 - Upload a source folder using **Upload codebase**. The browser accepts supported source files up to 2 MB each.
 - Select a file node to inspect functions, detected comments, and inferred connections. Drag nodes to arrange the map; drag the background to pan and use the controls or scroll to zoom.
 - Switch between **Files** and **Functions** to see file imports or individual function call references. Click a line or function node to inspect the linked source and callers/callees.
+- **Browse files & functions** opens a searchable index. Expand a file to inspect its functions, open the whole file, jump to a function, or open its source at the detected line.
 - Use the moon/sun control to switch between light and dark themes. Your theme preference is saved in this browser.
 - Select a finding to see its explanation and line location. **Open source & edit** opens a local editor; applying a change updates this review and downloads the changed file.
 - **Export report** downloads a JSON summary.

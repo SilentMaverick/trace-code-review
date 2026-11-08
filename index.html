@@ -25,7 +25,7 @@
     <main class="main-area">
       <header class="topbar">
         <div class="crumb"><span>Workspace</span><span class="slash">/</span><b id="projectCrumb">aurora-api</b><span class="branch-pill"><span class="green-dot"></span> Local review</span></div>
-        <div class="top-actions"><span class="saved"><span class="green-dot"></span> Changes saved locally</span><button class="icon-button" title="Keyboard shortcuts">⌘ K</button><button class="avatar tiny">S</button></div>
+        <div class="top-actions"><span class="saved"><span class="green-dot"></span> Changes saved locally</span><button class="icon-button" id="themeToggle" type="button" title="Switch to dark mode" aria-label="Switch to dark mode">☾</button><button class="icon-button" title="Keyboard shortcuts">⌘ K</button><button class="avatar tiny">S</button></div>
       </header>
       <section class="page-heading">
         <div><div class="eyebrow">CODEBASE OVERVIEW <span class="sync">·</span> <span id="scanTime">JUST NOW</span></div><h1>Review map</h1><p>Follow the code. Understand what it touches. Fix issues with context.</p></div>
@@ -41,10 +41,10 @@
 
       <section class="workspace-grid">
         <section class="map-panel panel">
-          <div class="panel-header"><div><div class="panel-title">Relationship map <span class="live-tag">LIVE</span></div><div class="panel-subtitle">Drag to arrange · select a node to inspect</div></div><div class="map-tools"><button id="mapReset" class="mini-tool" title="Reset map">↺</button><button id="zoomOut" class="mini-tool" title="Zoom out">−</button><span id="zoomLabel">100%</span><button id="zoomIn" class="mini-tool" title="Zoom in">+</button><button id="fitMap" class="mini-tool" title="Fit map">⤢</button></div></div>
-          <div class="map-legend"><span><i class="legend-dot violet"></i>Entry points</span><span><i class="legend-dot blue"></i>Services</span><span><i class="legend-dot green"></i>Data layer</span><span><i class="legend-flag">⚑</i>Finding</span></div>
+          <div class="panel-header"><div><div class="panel-title">Relationship map <span class="live-tag">STATIC</span></div><div class="panel-subtitle">Inferred imports and calls · this map does not execute code</div></div><div class="map-tools"><div class="view-switch" role="group" aria-label="Map view"><button class="view-option active" id="mapModeFiles" type="button">Files</button><button class="view-option" id="mapModeFunctions" type="button">Functions</button></div><button id="mapReset" class="mini-tool" title="Reset map">↺</button><button id="zoomOut" class="mini-tool" title="Zoom out">−</button><span id="zoomLabel">100%</span><button id="zoomIn" class="mini-tool" title="Zoom in">+</button><button id="fitMap" class="mini-tool" title="Fit map">⤢</button></div></div>
+          <div class="map-legend"><span><i class="legend-dot violet"></i>Entry points</span><span><i class="legend-dot blue"></i>Services</span><span><i class="legend-dot green"></i>Data layer</span><span><i class="legend-flag">⚑</i>Finding</span><span class="legend-note">Lines are inferred references, not runtime flow</span></div>
           <div class="map-canvas" id="mapCanvas"><svg class="map-lines" id="mapLines" aria-hidden="true"></svg><div class="map-nodes" id="mapNodes"></div><div class="map-hint">Scroll to zoom · drag to pan</div></div>
-          <div class="map-footer"><span><i class="green-dot"></i> Showing <b id="mapSummary">12 files</b> and <b id="mapFunctionSummary">38 functions</b></span><button class="text-button" id="showAll">Show all files <span>→</span></button></div>
+          <div class="map-footer"><span><i class="green-dot"></i> Showing <b id="mapSummary">12 files</b> and <b id="mapFunctionSummary">38 functions</b></span><button class="text-button" id="showAll">Show functions <span>→</span></button></div>
         </section>
 
         <aside class="detail-panel panel" id="detailPanel"><div class="detail-empty"><div class="empty-glyph">⌖</div><h3>Select a node</h3><p>Choose a file or function on the map to see its connections and source.</p></div></aside>

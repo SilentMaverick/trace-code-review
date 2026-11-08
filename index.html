@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f6f7f9" />
+  <title>Trace — Codebase review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="rail">
+      <a class="brand" href="#" aria-label="Trace home"><span class="brand-mark">t</span><span class="brand-word">trace</span></a>
+      <div class="rail-label">WORKSPACE</div>
+      <button class="rail-item active" aria-label="Codebase map"><span class="rail-icon">⌘</span><span>Review map</span></button>
+      <button class="rail-item" id="issuesNav"><span class="rail-icon">⚑</span><span>Findings</span><span class="rail-count" id="railCount">04</span></button>
+      <div class="rail-spacer"></div>
+      <button class="rail-item subtle" id="helpBtn"><span class="rail-icon">?</span><span>How it works</span></button>
+      <div class="user-chip"><div class="avatar">S</div><div><b>Local workspace</b><small>Private · on this device</small></div><span class="dots">···</span></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="crumb"><span>Workspace</span><span class="slash">/</span><b id="projectCrumb">aurora-api</b><span class="branch-pill"><span class="green-dot"></span> Local review</span></div>
+        <div class="top-actions"><span class="saved"><span class="green-dot"></span> Changes saved locally</span><button class="icon-button" title="Keyboard shortcuts">⌘ K</button><button class="avatar tiny">S</button></div>
+      </header>
+      <section class="page-heading">
+        <div><div class="eyebrow">CODEBASE OVERVIEW <span class="sync">·</span> <span id="scanTime">JUST NOW</span></div><h1>Review map</h1><p>Follow the code. Understand what it touches. Fix issues with context.</p></div>
+        <div class="heading-actions"><button class="button button-light" id="exportBtn"><span>↓</span> Export report</button><label class="button button-dark upload-button"><span>↑</span> Upload codebase<input type="file" id="fileInput" multiple webkitdirectory directory /></label></div>
+      </section>
+
+      <section class="stats-row" aria-label="Codebase summary">
+        <article class="stat-card"><div class="stat-label">FILES REVIEWED <span class="stat-icon">▤</span></div><div class="stat-value" id="fileStat">12</div><div class="stat-foot"><span class="muted-dot"></span>Across your workspace</div></article>
+        <article class="stat-card"><div class="stat-label">FUNCTIONS MAPPED <span class="stat-icon">ƒ</span></div><div class="stat-value" id="functionStat">38</div><div class="stat-foot"><span class="blue-dot"></span>Calls and references linked</div></article>
+        <article class="stat-card"><div class="stat-label">OPEN FINDINGS <span class="stat-icon">⚑</span></div><div class="stat-value" id="findingStat">04</div><div class="stat-foot"><span class="orange-dot"></span><span id="criticalStat">1 high · 2 medium · 1 low</span></div></article>
+        <article class="stat-card"><div class="stat-label">SUPPORTED FILES SCANNED <span class="stat-icon">◉</span></div><div class="stat-value">100<span class="percent">%</span></div><div class="coverage-bar"><i></i></div><div class="stat-foot">Browser heuristics ran on loaded files</div></article>
+      </section>
+
+      <section class="workspace-grid">
+        <section class="map-panel panel">
+          <div class="panel-header"><div><div class="panel-title">Relationship map <span class="live-tag">LIVE</span></div><div class="panel-subtitle">Drag to arrange · select a node to inspect</div></div><div class="map-tools"><button id="mapReset" class="mini-tool" title="Reset map">↺</button><button id="zoomOut" class="mini-tool" title="Zoom out">−</button><span id="zoomLabel">100%</span><button id="zoomIn" class="mini-tool" title="Zoom in">+</button><button id="fitMap" class="mini-tool" title="Fit map">⤢</button></div></div>
+          <div class="map-legend"><span><i class="legend-dot violet"></i>Entry points</span><span><i class="legend-dot blue"></i>Services</span><span><i class="legend-dot green"></i>Data layer</span><span><i class="legend-flag">⚑</i>Finding</span></div>
+          <div class="map-canvas" id="mapCanvas"><svg class="map-lines" id="mapLines" aria-hidden="true"></svg><div class="map-nodes" id="mapNodes"></div><div class="map-hint">Scroll to zoom · drag to pan</div></div>
+          <div class="map-footer"><span><i class="green-dot"></i> Showing <b id="mapSummary">12 files</b> and <b id="mapFunctionSummary">38 functions</b></span><button class="text-button" id="showAll">Show all files <span>→</span></button></div>
+        </section>
+
+        <aside class="detail-panel panel" id="detailPanel"><div class="detail-empty"><div class="empty-glyph">⌖</div><h3>Select a node</h3><p>Choose a file or function on the map to see its connections and source.</p></div></aside>
+      </section>
+
+      <section class="findings-panel panel" id="findingsPanel">
+        <div class="findings-head"><div><div class="panel-title">Review findings <span class="finding-total" id="findingBadge">04</span></div><div class="panel-subtitle">Potential issues surfaced from static analysis</div></div><div class="filter-tabs" id="filterTabs"><button class="filter-tab active" data-filter="all">All <span id="allCount">4</span></button><button class="filter-tab" data-filter="high">High <span id="highCount">1</span></button><button class="filter-tab" data-filter="medium">Medium <span id="mediumCount">2</span></button><button class="filter-tab" data-filter="low">Low <span id="lowCount">1</span></button></div></div>
+        <div class="findings-list" id="findingsList"></div>
+        <div class="findings-footer"><span>Static analysis is a starting point, not a guarantee. Always verify before changing code.</span><button class="text-button" id="rerunBtn">↻ Re-run review</button></div>
+      </section>
+      <footer class="app-footer"><span>TRACE <span class="footer-sep">/</span> LOCAL CODE REVIEW</span><span>Files stay on your device <i class="lock">▣</i></span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <dialog id="editDialog"><form method="dialog" class="dialog-card"><div class="dialog-top"><div><div class="eyebrow">QUICK EDIT</div><h2 id="dialogTitle">Edit source</h2></div><button class="mini-tool" aria-label="Close">×</button></div><p id="dialogDescription" class="dialog-description">Review the suggested change before applying it.</p><textarea id="editArea" spellcheck="false"></textarea><div class="dialog-actions"><button class="button button-light" value="cancel">Cancel</button><button class="button button-dark" id="applyEdit" value="apply">Apply change</button></div></form></dialog>
+  <script src="app.js"></script>
+</body>
+</html>

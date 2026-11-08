@@ -2,6 +2,8 @@
 
 The review analysis currently runs in `app.js` in the browser. It recognizes a subset of function declarations and uses regular-expression heuristics to find selected risk and maintainability patterns.
 
+Supported source can come from a local folder or an explicitly selected GitHub repository. Repository imports are limited to supported text files under 2 MB, up to 300 files per pass. A workspace can be downloaded as a ZIP or pushed as one GitHub commit; a push only happens after the user chooses a repo and confirms any path overwrites.
+
 ## Relationship map
 
 Function call links are inferred by matching recognizable names in a function's source section. File links are inferred from recognizable imports. These edges describe possible source references; they do not execute code or prove a runtime path. The current parser is not language-complete, and matches can be missed or be false positives.
